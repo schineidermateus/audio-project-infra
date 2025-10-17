@@ -1,0 +1,43 @@
+services:
+  backend:
+    # Indica ao docker-compose para construir a imagem a partir do Dockerfile
+    # que está no diretório 'backend'
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    
+    # Mapeia a porta do container (3000) para uma porta na sua máquina local (3000)
+    ports:
+      - "3000:3000"
+      
+    # Mapeia o código local para o container, para que as mudanças 
+    # sejam refletidas instantaneamente (ótimo para desenvolvimento)
+    volumes:
+      - ../backend:/usr/src/app
+      - /usr/src/app/node_modules # Evita sobrescrever o node_modules instalado
+
+    # Configuração para reiniciar o container se ele falhar
+    restart: always
+    
+    # Nome do container (opcional, para facilitar a identificação)
+    container_name: audio-backend
+  frontend:
+    # Construção da imagem usando o novo Dockerfile
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+      
+    # Mapeamento da porta: 4200 (máquina local) -> 4200 (container)
+    ports:
+      - "4200:4200"
+
+    # Mapeia o código e ignora o node_modules interno para evitar conflitos
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules # Evita sobrescrever o node_modules
+
+    # Garante que o frontend espere o backend estar pronto
+    depends_on:
+      - backend
+      
+    container_name: audio-frontend
