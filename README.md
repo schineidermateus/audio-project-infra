@@ -37,9 +37,9 @@ A execução envolve a construção das imagens e a inicialização dos containe
 # Assumindo que você está na pasta onde deseja clonar o projeto
 mkdir projeto-audio
 cd projeto-audio
-git clone schineidermateus/audio-project-frontend
-git clone schineidermateus/audio-project-backend
-git clone schineidermateus/audio-project-infra
+git clone https://github.com/schineidermateus/audio-project-frontend.git
+git clone https://github.com/schineidermateus/audio-project-backend.git
+git clone https://github.com/schineidermateus/audio-project-infra.git
 cd audio-project-infra
 ```
 
